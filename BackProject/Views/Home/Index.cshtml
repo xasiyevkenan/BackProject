@@ -91,10 +91,10 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="courseRow">
             @foreach (var course in courses)
             {
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="col-md-4 col-sm-6 col-xs-12 mb-10">
                     <div class="single-course">
                         <div class="course-img">
                             <a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id">
@@ -112,6 +112,10 @@
                     </div>
                 </div>
             }
+        </div>
+        <div class="row text-center single-course">
+            <input value="@ViewBag.CourseCount" type="hidden" id="courseCount" />
+            <button class="btn btn-primary" id="loadMore">Load More...</button>
         </div>
     </div>
 </div>
@@ -222,10 +226,10 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row " id="blogRow">
             @foreach (var blog in blogs)
             {
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="col-md-4 col-sm-6 col-xs-12 mb-10">
                     <div class="single-blog">
                         <div class="blog-img">
                             <a asp-controller="Blog" asp-action="Details" asp-route-id="@blog.Id"><img src="~/@blog.ImageUrl" alt="blog"></a>
@@ -246,6 +250,10 @@
                 </div>
             }
         </div>
+            <div class="row text-center">
+                <input value="@ViewBag.BlogCount" type="hidden" id="blogCount" />
+                <button class="btn btn-primary justify-content-center" id="loadMore2">Load More...</button>
+            </div>
     </div>
 </div>
 <!-- Blog Area End -->

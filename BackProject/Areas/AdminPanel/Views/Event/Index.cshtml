@@ -1,0 +1,51 @@
+﻿
+<h1>Events</h1>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-EventTop">Basic Table</h4>
+        <p class="card-description">
+            Add class <code>.table</code>
+        </p>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Time</th>
+                        <th>Date</th>
+                        <th>location</th>
+                        <th></th>
+                        <th>Actions</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Event in Model)
+                    {
+                        <tr>
+                            <td><img width="130" height="130" style="border-radius:50%" src="~/@Event.ImageUrl"></td>
+                            <td>@Event.Title</td>
+                            <td>@Event.Time</td>
+                            <td>@Event.Date</td>
+                            <td>@Event.Location</td>
+                            <td><a asp asp-action="details" asp-route-id="@Event.Id" class="btn btn-warning">Details</a></td>
+
+                            <td>
+                                <form asp-action="Delete" method="post">
+                                    <input type="hidden" name="id" value="@Event.Id" />
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+
+                            <td><a asp-action="update" asp-route-id="@Event.Id" class="btn btn-outline-warning">Update</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

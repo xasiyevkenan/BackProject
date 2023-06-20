@@ -13,8 +13,8 @@
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="header-top-right text-right">
                         <ul>
-                            <li><a href="login.html">login</a></li>
-                            <li><a href="signup.html">signup</a></li>
+                            <li><a asp-controller="Login">login</a></li>
+                            <li><a asp-controller="Signup">signup</a></li>
                         </ul>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                             <div class="search">
                                 <div class="search-form">
                                     <form id="search-form" action="#">
-                                        <input class="searchInput" type="search" placeholder="Search here..." name="search" />
+                                        <input id="searchInput" type="search" placeholder="Search here..." name="search" />
                                         <button type="submit">
                                             <span><i class="fa fa-search"></i></span>
                                         </button>

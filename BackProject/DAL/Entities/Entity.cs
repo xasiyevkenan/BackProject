@@ -1,4 +1,7 @@
-﻿namespace BackProject.DAL.Entities
+﻿using Microsoft.Build.Framework;
+using System.ComponentModel.DataAnnotations;
+
+namespace BackProject.DAL.Entities
 {
     public class Entity
     {

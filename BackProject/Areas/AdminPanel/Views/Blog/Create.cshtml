@@ -1,0 +1,26 @@
+﻿@model Blogs
+
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-BlogTop">Create Blog</h4>
+            <p class="card-description">
+                Blog Form
+            </p>
+            <form class="forms-sample" method="post">
+                <div class="form-group">
+                    <label asp-for="BlogTop">BlogTop</label>
+                    <input asp-for="BlogTop" class="form-control" id="exampleInputUsername1" placeholder="BlogTop...">
+                    <span asp-validation-for="BlogTop"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description">Description</label>
+                    <input asp-for="Description" class="form-control" id="exampleInputEmail1" placeholder="Description...">
+                </div>
+
+                <button type="submit" class="btn btn-primary mr-2">Create</button>
+                <button asp-action="index" class="btn btn-light">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>

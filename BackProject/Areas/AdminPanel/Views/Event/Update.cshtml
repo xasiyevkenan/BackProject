@@ -1,0 +1,35 @@
+﻿@model Events;
+
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-Title">Update Event</h4>
+            <p class="card-description">
+                Event Form
+            </p>
+            <form class="forms-sample" method="post">
+                <div class="form-group">
+                    <label asp-for="Title">Title</label>
+                    <input asp-for="Title" class="form-control" id="exampleInputUsername1" placeholder="Title...">
+                    <span asp-validation-for="Title"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Time">Time</label>
+                    <input asp-for="Time" class="form-control" id="exampleInputEmail1" placeholder="Time...">
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Location">Location</label>
+                    <input asp-for="Location" class="form-control" id="exampleInputEmail1" placeholder="Location...">
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Date">Date</label>
+                    <input asp-for="Date" class="form-control" id="exampleInputEmail1" placeholder="Date...">
+                </div>
+
+                <button type="submit" class="btn btn-primary mr-2">Update</button>
+                <button asp-action="index" class="btn btn-light">Cancel</button>
+            </form>
+        </div>
+    </div>

@@ -8,14 +8,21 @@ namespace BackProject.Controllers
     public class HomeController : Controller
     {
         private readonly AppDbContext _dbContext;
+        private readonly int _courseCount;
+        private readonly int _blogCount;
 
         public HomeController(AppDbContext dbcontext)
         {
             _dbContext = dbcontext;
+            _courseCount = _dbContext.Courses.Count();
+            _blogCount = _dbContext.Blogs.Count();
         }
 
         public IActionResult Index()
         {
+            ViewBag.CourseCount = _courseCount;
+            ViewBag.BlogCount = _blogCount;
+
             var mainslider = _dbContext.MainSlider.ToList();
             var services = _dbContext.ServiceArea.ToList();
             var about = _dbContext.AboutArea.FirstOrDefault();
@@ -44,9 +51,18 @@ namespace BackProject.Controllers
             return View(viewModel);
         }
 
-        public IActionResult Details()
+        public IActionResult LoadCourses(int skip)
         {
-            return View();
+            var courses = _dbContext.Courses?.Skip(skip).Take(3).ToList();
+
+            return PartialView("_CoursePartial", courses);
+        }
+
+        public IActionResult LoadBlogs(int skip)
+        {
+            var blogs = _dbContext.Blogs?.Skip(skip).Take(3).ToList();
+
+            return PartialView("_BlogPartial", blogs);
         }
     }
 }

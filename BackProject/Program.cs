@@ -1,3 +1,4 @@
+using BackProject.Areas.AdminPanel.Data;
 using BackProject.DAL;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,7 +11,9 @@ namespace BackProject
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddMvc();
+
+            Constants.ImagePath = Path.Combine(builder.Environment.WebRootPath, "img");
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -35,9 +38,15 @@ namespace BackProject
 
             app.UseAuthorization();
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                   name: "areas",
+                   pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}"
+                );
+
+                endpoints.MapControllerRoute("default", "{controller=home}/{action=index}/{id?}");
+            });
 
             app.Run();
         }

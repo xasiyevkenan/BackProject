@@ -44,7 +44,7 @@ namespace BackProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AboutArea");
+                    b.ToTable("AboutArea", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.Blogs", b =>
@@ -64,12 +64,12 @@ namespace BackProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Blogs");
+                    b.ToTable("Blogs", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.Contact", b =>
@@ -90,7 +90,7 @@ namespace BackProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contact");
+                    b.ToTable("Contact", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.Courses", b =>
@@ -106,16 +106,17 @@ namespace BackProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.Events", b =>
@@ -131,24 +132,27 @@ namespace BackProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Location")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Time")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Events");
+                    b.ToTable("Events", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.Footer", b =>
@@ -169,7 +173,7 @@ namespace BackProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Footer");
+                    b.ToTable("Footer", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.GetInTouch", b =>
@@ -191,7 +195,7 @@ namespace BackProject.Migrations
 
                     b.HasIndex("FooterId");
 
-                    b.ToTable("GetInTouch");
+                    b.ToTable("GetInTouch", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.Header", b =>
@@ -209,7 +213,7 @@ namespace BackProject.Migrations
 
                     b.HasIndex("LogoId");
 
-                    b.ToTable("Header");
+                    b.ToTable("Header", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.Informations", b =>
@@ -231,7 +235,7 @@ namespace BackProject.Migrations
 
                     b.HasIndex("FooterId");
 
-                    b.ToTable("Informations");
+                    b.ToTable("Informations", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.Logos", b =>
@@ -261,7 +265,7 @@ namespace BackProject.Migrations
 
                     b.HasIndex("FooterId");
 
-                    b.ToTable("Logos");
+                    b.ToTable("Logos", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.MainSlider", b =>
@@ -277,8 +281,8 @@ namespace BackProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -286,7 +290,7 @@ namespace BackProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MainSlider");
+                    b.ToTable("MainSlider", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.Navigations", b =>
@@ -316,7 +320,7 @@ namespace BackProject.Migrations
 
                     b.HasIndex("ParentNavigationId");
 
-                    b.ToTable("Navigations");
+                    b.ToTable("Navigations", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.NoticeArea", b =>
@@ -337,7 +341,7 @@ namespace BackProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("NoticeAreas");
+                    b.ToTable("NoticeAreas", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.NoticeBoard", b =>
@@ -363,7 +367,7 @@ namespace BackProject.Migrations
 
                     b.HasIndex("NoticeAreaId");
 
-                    b.ToTable("NoticeBoards");
+                    b.ToTable("NoticeBoards", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.ServiceArea", b =>
@@ -384,7 +388,7 @@ namespace BackProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ServiceArea");
+                    b.ToTable("ServiceArea", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.SocialMediaIcons", b =>
@@ -406,7 +410,7 @@ namespace BackProject.Migrations
 
                     b.HasIndex("FooterId");
 
-                    b.ToTable("SocialMediaIcons");
+                    b.ToTable("SocialMediaIcons", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.Subscribe", b =>
@@ -427,7 +431,7 @@ namespace BackProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Subscribe");
+                    b.ToTable("Subscribe", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.Teachers", b =>
@@ -443,8 +447,8 @@ namespace BackProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -452,7 +456,7 @@ namespace BackProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teachers");
+                    b.ToTable("Teachers", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.TestImonialArea", b =>
@@ -481,7 +485,7 @@ namespace BackProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TestImonialArea");
+                    b.ToTable("TestImonialArea", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.UsefulLinks", b =>
@@ -503,7 +507,7 @@ namespace BackProject.Migrations
 
                     b.HasIndex("FooterId");
 
-                    b.ToTable("UsefulLinks");
+                    b.ToTable("UsefulLinks", (string)null);
                 });
 
             modelBuilder.Entity("BackProject.DAL.Entities.GetInTouch", b =>

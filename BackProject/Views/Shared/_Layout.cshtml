@@ -27,9 +27,7 @@
     <script src="~/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
-    <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+   
     @await Component.InvokeAsync("Header") ;
     @RenderBody()
     @await Component.InvokeAsync("Footer") ;
@@ -44,6 +42,7 @@
     <script src="~/js/jquery.nicescroll.min.js"></script>
     <script src="~/js/plugins.js"></script>
     <script src="~/js/main.js"></script>
+    <script src="~/js/script.js" asp-append-version="true"></script>
 </body>
 
 <!-- Mirrored from demo.devitems.com/eduhome/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 21 Jun 2020 19:41:25 GMT -->
