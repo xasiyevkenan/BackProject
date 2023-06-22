@@ -29,17 +29,11 @@ namespace BackProject.Controllers
 
         public IActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return BadRequest();
-            }
+            if (id == null) return BadRequest();
 
             var events = _dbContext.Events.Find(id);
 
-            if (events == null)
-            {
-                return NotFound();
-            }
+            if (events == null) return NotFound();
 
             return View(events);
         }

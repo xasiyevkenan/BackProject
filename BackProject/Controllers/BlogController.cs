@@ -29,17 +29,11 @@ namespace BackProject.Controllers
 
         public IActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return BadRequest();
-            }
+            if (id == null) return BadRequest();
 
             var blogs = _dbContext.Blogs.Find(id);
 
-            if (blogs == null)
-            {
-                return NotFound();
-            }
+            if (blogs == null) return NotFound();
 
             return View(blogs);
         }

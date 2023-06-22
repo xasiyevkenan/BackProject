@@ -2,6 +2,7 @@
 using BackProject.DAL.Entities;
 using BackProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 namespace BackProject.Controllers
@@ -30,19 +31,22 @@ namespace BackProject.Controllers
 
         public IActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return BadRequest();
-            }
+            if (id == null) return BadRequest();
 
             var course = _dbContext.Courses.Find(id);
 
-            if (course == null)
-            {
-                return NotFound();
-            }
+            if (course == null) return NotFound();
 
             return View(course);
+        }
+
+        public IActionResult Search(string searchedCoursesTitle)
+        {
+            var searchedCourses = _dbContext.Courses
+                .Where(x => x.Title.ToLower().Contains(searchedCoursesTitle.ToLower()))
+                .ToList();
+
+            return PartialView("_SearchedCoursePartial", searchedCourses);
         }
     }
 }

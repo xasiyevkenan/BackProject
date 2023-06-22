@@ -54,37 +54,44 @@ namespace BackProject.Areas.AdminPanel.Controllers
                 return View();
             }
 
-            var isExist = await _dbContext.Courses.AnyAsync(x => x.Title.ToUpper() == course.Title.ToUpper());
+            var isExist = await _dbContext.Courses
+                .AnyAsync(x => x.Title.ToUpper() == course.Title.ToUpper());
 
             if (isExist)
             {
                 ModelState.AddModelError("Title", "Bu Kurs Artıq Mövcuddur");
+
                 return View();
             }
 
             if (!course.Image.ContentType.Contains("image"))
             {
                 ModelState.AddModelError("Image", "Şəkil seçməlisiniz!");
+
                 return View();
             }
 
             if (course.Image.Length > 1024 * 1024)
             {
                 ModelState.AddModelError("Image", "Şəkil 1mb-dan çox olmamalıdır");
+
                 return View();
             }
 
             var pathCourse = Path.Combine(Constants.ImagePath, "course");
+
             var pathGuid = $"{Guid.NewGuid()}-{course.Image.FileName}";
 
             var path = Path.Combine(pathCourse, pathGuid);
-            var pathUrl = Path.Combine("img", "course", pathGuid);
 
-            var fs = new FileStream(path, FileMode.CreateNew);
+            var pathUrl = Path.Combine("img", "course", pathGuid);
 
             course.ImageUrl = pathUrl;
 
+            var fs = new FileStream(path, FileMode.CreateNew);
+
             await course.Image.CopyToAsync(fs);
+
             fs.Close();
 
             await _dbContext.Courses.AddAsync(course);
@@ -105,6 +112,7 @@ namespace BackProject.Areas.AdminPanel.Controllers
             if (course == null) return NotFound();
 
             var newPath = course.ImageUrl.Remove(0, 4);
+
             var path = Path.Combine(Constants.ImagePath, newPath);
 
             if (Files.Exists(path))
@@ -139,7 +147,6 @@ namespace BackProject.Areas.AdminPanel.Controllers
 
             if (id != course.Id) return BadRequest();
 
-
             var existCourse = await _dbContext.Courses.FindAsync(id);
 
             existCourse.Title = course.Title;
@@ -147,6 +154,7 @@ namespace BackProject.Areas.AdminPanel.Controllers
             existCourse.Description = course.Description;
 
             var trimmedName = existCourse.ImageUrl.Remove(0, 4);
+
             var pathForDelete = Path.Combine(Constants.ImagePath, trimmedName);
 
             if (Files.Exists(pathForDelete))
@@ -154,7 +162,8 @@ namespace BackProject.Areas.AdminPanel.Controllers
                 Files.Delete(pathForDelete);
             }
 
-            var isExist = await _dbContext.Courses.AnyAsync(x => x.Title.ToUpper() == course.Title.ToUpper() && x.Id != id);
+            var isExist = await _dbContext.Courses
+                .AnyAsync(x => x.Title.ToUpper() == course.Title.ToUpper() && x.Id != id);
 
             if (isExist)
             {
@@ -163,7 +172,9 @@ namespace BackProject.Areas.AdminPanel.Controllers
             }
 
             var path = Path.Combine(Constants.ImagePath, "course");
+
             var fileName = await course.Image.GenerateFile(path);
+
             existCourse.ImageUrl = $"img/course/{fileName}";
 
             await _dbContext.SaveChangesAsync();

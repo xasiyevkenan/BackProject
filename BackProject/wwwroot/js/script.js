@@ -28,7 +28,9 @@
 
             }
         });
-    })
+
+    });
+
 
     $(document).on("click", "#loadMore2", function () {
 
@@ -51,8 +53,26 @@
 
             }
         });
-    })
-})
+    });
 
+    $(document).on('keyup', '#searchedCourses', function () {
+
+        var searchedCoursesTitle = $(this).val()
+
+        $.ajax({
+            url: `/Course/Search?searchedCoursesTitle=${searchedCoursesTitle}`,
+            type: "GET",
+
+            success: function (response) {
+                $('#searched_Course').slice(1)
+                $('#searched_Course').append(response)
+            },
+
+            error: function (xhr) {
+
+            }
+        })
+    })
+});
 
 

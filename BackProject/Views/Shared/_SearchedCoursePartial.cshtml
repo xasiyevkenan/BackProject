@@ -1,0 +1,10 @@
+﻿@model List<Courses>
+
+@foreach (var item in Model)
+{
+    <li class="list-group-item disabled">
+        <a asp-controller="Course" asp-action="details" asp-route-id="@item.Id">
+            @item.Title
+        </a>
+    </li>
+}

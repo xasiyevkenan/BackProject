@@ -7,12 +7,19 @@
             <p class="card-description">
                 Blog Form
             </p>
-            <form class="forms-sample" method="post">
+            <form class="forms-sample" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label asp-for="BlogTop">BlogTop</label>
                     <input asp-for="BlogTop" class="form-control" id="exampleInputUsername1" placeholder="BlogTop...">
                     <span asp-validation-for="BlogTop"></span>
                 </div>
+
+                <div class="form-group" enctype="multipart/form-data">
+                    <label asp-for="Image">Image</label>
+                    <input asp-for="Image" class="form-control" id="exampleInputUsername1" accept="image/*" placeholder="Image...">
+                    <span asp-validation-for="Image"></span>
+                </div>
+
                 <div class="form-group">
                     <label asp-for="Description">Description</label>
                     <input asp-for="Description" class="form-control" id="exampleInputEmail1" placeholder="Description...">

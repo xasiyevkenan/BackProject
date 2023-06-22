@@ -30,17 +30,11 @@ namespace BackProject.Controllers
 
         public IActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return BadRequest();
-            }
+            if (id == null) return BadRequest();
 
             var teachers = _dbContext.Teachers.Find(id);
 
-            if (teachers == null)
-            {
-                return NotFound();
-            }
+            if (teachers == null) return NotFound();
 
             return View(teachers);
         }

@@ -9,7 +9,9 @@ namespace BackProject.DAL.Entities
         public string ImageUrl { get; set; }
         [NotMapped]
         public IFormFile Image { get; set; }
+        [MaxLength(600)]
         public string Title { get; set; }
+        [MaxLength(500)]
         public string Description { get; set; }
     }
 }

@@ -7,15 +7,23 @@
             <p class="card-description">
                 Event Form
             </p>
-            <form class="forms-sample" method="post">
+            <form class="forms-sample" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label asp-for="Title">Title</label>
                     <input asp-for="Title" class="form-control" id="exampleInputUsername1" placeholder="Title...">
                     <span asp-validation-for="Title"></span>
                 </div>
+
                 <div class="form-group">
                     <label asp-for="Time">Time</label>
                     <input asp-for="Time" class="form-control" id="exampleInputEmail1" placeholder="Time...">
+                </div>
+
+                <div class="form-group" enctype="multipart/form-data">
+                    <label asp-for="Image">Image</label>
+                    <img width="130" height="130" style="border-radius:50%" src="~/@Model.ImageUrl">
+                    <input asp-for="Image" class="form-control" id="exampleInputUsername1" accept="image/*" placeholder="Image...">
+                    <span asp-validation-for="Image"></span>
                 </div>
 
                 <div class="form-group">

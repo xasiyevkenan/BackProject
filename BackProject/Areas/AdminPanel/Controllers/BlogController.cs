@@ -2,6 +2,8 @@
 using BackProject.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using BackProject.Areas.AdminPanel.Data;
+using Files = System.IO.File;
 
 namespace BackProject.Areas.AdminPanel.Controllers
 {
@@ -52,13 +54,45 @@ namespace BackProject.Areas.AdminPanel.Controllers
                 return View();
             }
 
-            var isExist = await _dbContext.Blogs.AnyAsync(x => x.BlogTop.ToUpper() == Blog.BlogTop.ToUpper());
+            var isExist = await _dbContext.Blogs
+                .AnyAsync(x => x.BlogTop.ToUpper() == Blog.BlogTop.ToUpper());
 
             if (isExist)
             {
                 ModelState.AddModelError("BlogTop", "Bu Blog Artıq Mövcuddur");
+
                 return View();
             }
+
+            if (!Blog.Image.ContentType.Contains("image"))
+            {
+                ModelState.AddModelError("Image", "Şəkil seçməlisiniz!");
+
+                return View();
+            }
+
+            if (Blog.Image.Length > 1024 * 1024)
+            {
+                ModelState.AddModelError("Image", "Şəkil 1mb-dan çox olmamalıdır");
+
+                return View();
+            }
+
+            var pathBlog = Path.Combine(Constants.ImagePath, "Blog");
+
+            var pathGuid = $"{Guid.NewGuid()}-{Blog.Image.FileName}";
+
+            var path = Path.Combine(pathBlog, pathGuid);
+
+            var pathUrl = Path.Combine("img", "Blog", pathGuid);
+
+            Blog.ImageUrl = pathUrl;
+
+            var fs = new FileStream(path, FileMode.CreateNew);
+
+            await Blog.Image.CopyToAsync(fs);
+
+            fs.Close();
 
             await _dbContext.Blogs.AddAsync(Blog);
 
@@ -77,13 +111,21 @@ namespace BackProject.Areas.AdminPanel.Controllers
 
             if (Blog == null) return NotFound();
 
+            var newPath = Blog.ImageUrl.Remove(0, 4);
+
+            var path = Path.Combine(Constants.ImagePath, newPath);
+
+            if (Files.Exists(path))
+            {
+                Files.Delete(path);
+            }
+
             _dbContext.Blogs.Remove(Blog);
 
             await _dbContext.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
-
 
         public async Task<IActionResult> Update(int? id)
         {
@@ -115,8 +157,24 @@ namespace BackProject.Areas.AdminPanel.Controllers
             if (isExist)
             {
                 ModelState.AddModelError("BlogTop", "Bu Kurs Artıq Mövcuddur");
+
                 return View();
             }
+
+            var trimmedName = existBlog.ImageUrl.Remove(0, 4);
+
+            var pathForDelete = Path.Combine(Constants.ImagePath, trimmedName);
+
+            if (Files.Exists(pathForDelete))
+            {
+                Files.Delete(pathForDelete);
+            }
+
+            var path = Path.Combine(Constants.ImagePath, "Blog");
+
+            var fileName = await Blog.Image.GenerateFile(path);
+
+            existBlog.ImageUrl = $"img/Blog/{fileName}";
 
             await _dbContext.SaveChangesAsync();
 

@@ -13,8 +13,15 @@
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="header-top-right text-right">
                         <ul>
-                            <li><a asp-controller="Login">login</a></li>
-                            <li><a asp-controller="Signup">signup</a></li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li><a asp-controller="Account" asp-action="logout">logout</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-controller="Account" asp-action="Login">login</a></li>
+                                <li><a asp-controller="Account" asp-action="SignUp">signup</a></li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -47,6 +54,7 @@
                                             </ul>
                                         </li>
                                     }
+                                </ul>
                             </nav>
                         </div>
                         <!--Search Form Start-->
@@ -58,11 +66,15 @@
                             </ul>
                             <div class="search">
                                 <div class="search-form">
-                                    <form id="search-form" action="#">
-                                        <input id="searchInput" type="search" placeholder="Search here..." name="search" />
-                                        <button type="submit">
-                                            <span><i class="fa fa-search"></i></span>
-                                        </button>
+                                    <form id="search-form" action="#" method="get">
+                                        <ul id="searched_Course" class="list-group">
+                                            <li>
+                                                <input id="searchedCourses" type="search" placeholder="Search here..." name="searchedCoursesTitle" />
+                                                <button type="submit">
+                                                    <span><i class="fa fa-search"></i></span>
+                                                </button>
+                                            </li>
+                                        </ul>
                                     </form>
                                 </div>
                             </div>
